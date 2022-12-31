@@ -14,11 +14,11 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    // form.reset();
     loginExistedUser(email, password)
       .then((result) => {
         const { user } = result;
         console.log(user);
+        form.reset();
         router.push('/');
         toast.success("User Login Successfully");
       }).catch((err) => {
