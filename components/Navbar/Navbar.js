@@ -28,7 +28,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="hidden md:block">
-          <ul className="md:flex gap-4 items-center">
+          <ul className="md:flex gap-10 items-center">
             <li>
               <Link className="font-medium" href="/">Home</Link>
             </li>
