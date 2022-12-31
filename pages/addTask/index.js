@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -6,7 +7,7 @@ import { addTaskToDb } from '../../taskApi/taskApi';
 
 const AddTask = () => {
   const { user } = useContext(AuthContext);
-
+  const router = useRouter();
   const handleAddTask = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,7 +17,8 @@ const AddTask = () => {
       title,
       description,
       userEmail: user?.email,
-      addedTime: new Date().toLocaleString()
+      addedTime: new Date().toLocaleString(),
+      status: 'incomplete'
     };
     // api
     addTaskToDb(taskData)
@@ -24,7 +26,8 @@ const AddTask = () => {
         if (data.acknowledged) {
           form.reset();
           console.log(data);
-          toast.success("Task Added")
+          toast.success("Task Added");
+          router.push('/myTask')
         }
       }).catch((error) => {
         console.log(err);

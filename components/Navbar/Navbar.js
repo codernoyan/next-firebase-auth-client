@@ -27,7 +27,7 @@ const Navbar = () => {
             <h2 className="font-semibold text-xl"><span className="font-bold text-sky-500">Next</span> Firebase</h2>
           </Link>
         </div>
-        <div className="hidden md:block">
+        <div>
           <ul className="md:flex gap-10 items-center">
             <li>
               <Link className="font-medium" href="/">Home</Link>
