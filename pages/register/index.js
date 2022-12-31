@@ -5,30 +5,30 @@ import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider';
 
-const Login = () => {
-  const { loginExistedUser, googleSignUp, loading, setLoading } = useContext(AuthContext);
+const Register = () => {
+  const { createNewUser, googleSignUp, setLoading, loading } = useContext(AuthContext);
   const router = useRouter();
-  // login handle
-  const handleLogin = (e) => {
+  // signup form
+  const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
     // form.reset();
-    loginExistedUser(email, password)
+    createNewUser(email, password)
       .then((result) => {
         const { user } = result;
         console.log(user);
         router.push('/');
-        toast.success("User Login Successfully");
+        toast.success("User Created Successfully");
       }).catch((err) => {
         console.error(err);
         toast.error(err.message);
       })
-  }
+  };
 
-  // google login
-  const handleGoogleLogin = () => {
+  // google sign up
+  const handleGoogleRegister = () => {
     googleSignUp()
       .then((result) => {
         const { user } = result.user;
@@ -51,11 +51,11 @@ const Login = () => {
       <section className="w-full md:w-1/3 mx-auto mt-20 flex justify-center items-center">
         <div className="flex-1">
           <div>
-            <h2 className="text-3xl font-semibold">Login</h2>
+            <h2 className="text-3xl font-semibold">Register</h2>
           </div>
           <div className="my-4">
             <div>
-              <form onSubmit={handleLogin} className="space-y-2">
+              <form onSubmit={handleRegister} className="space-y-2">
                 <div>
                   <input className="w-full rounded-md" type="email" name="email" placeholder="Email" />
                 </div>
@@ -64,11 +64,12 @@ const Login = () => {
                 </div>
                 <div>
                   <button type="submit" className="bg-sky-500 w-full py-2 flex gap-2 justify-center items-center font-bold text-white rounded-md">
-                    <span>Login</span>
+                    <span>Register</span>
                     <span>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                       </svg>
+
                     </span>
                   </button>
                 </div>
@@ -76,9 +77,9 @@ const Login = () => {
             </div>
           </div>
           <div>
-            <button onClick={handleGoogleLogin} className="border-2 border-sky-100 text-gray-600 w-full py-2 font-bold hover:bg-sky-100 rounded-md">Login with Google</button>
-            <p className="text-center mt-1">Does not have any account?
-              <Link className="text-sky-600 font-medium hover:underline" href="/register">Register</Link>
+            <button onClick={handleGoogleRegister} className="border-2 border-sky-100 text-gray-600 w-full py-2 font-bold hover:bg-sky-100 rounded-md">Register with Google</button>
+            <p className="text-center mt-1">Already have any account?
+              <Link className="text-sky-600 font-medium hover:underline" href="/login">Login</Link>
             </p>
           </div>
         </div>
@@ -87,4 +88,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
