@@ -1,14 +1,35 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import useSWR from 'swr'
 import MyTask from '../../components/MyTask/MyTask';
+import Spinner from '../../components/Spinner/Spinner';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 const MyTasks = () => {
   const { user } = useContext(AuthContext);
+  const router = useRouter();
   const { data: tasks, isLoading, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/user/tasks/${user?.email}?status=incomplete`, fetcher);
+
+  if (error) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <div className="flex flex-col gap-2 items-center">
+          <h2 className="text-xl font-bold text-sky-600">An Error Occurred</h2>
+          <div>
+            <button onClick={() => router.reload()} className="font-bold bg-sky-500 text-white py-1 px-4 rounded-md">Reload</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
   return (
     <>
       <Head>
@@ -35,7 +56,7 @@ const MyTasks = () => {
               :
               <>
                 <div className="mt-2">
-                <h2 className="text-sky-600 font-bold">You do not have any added tasks.</h2>
+                  <h2 className="text-sky-600 font-bold">You do not have any added tasks.</h2>
                 </div>
               </>
           }

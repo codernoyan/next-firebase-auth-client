@@ -29,18 +29,23 @@ const Navbar = () => {
         </div>
         <div>
           <ul className="md:flex gap-10 items-center">
-            <li>
-              <Link className="font-medium" href="/">Home</Link>
-            </li>
-            <li>
-              <Link className="font-medium" href="/addTask">Add Task</Link>
-            </li>
-            <li>
-              <Link className="font-medium" href="/myTask">My Task</Link>
-            </li>
-            <li>
-              <Link className="font-medium" href="/completed">Completed</Link>
-            </li>
+            {
+              user?.uid &&
+              <>
+                <li>
+                  <Link className="font-medium" href="/">Home</Link>
+                </li>
+                <li>
+                  <Link className="font-medium" href="/addTask">Add Task</Link>
+                </li>
+                <li>
+                  <Link className="font-medium" href="/myTask">My Task</Link>
+                </li>
+                <li>
+                  <Link className="font-medium" href="/completed">Completed</Link>
+                </li>
+              </>
+            }
             {
               user?.uid ?
                 <li>
