@@ -1,17 +1,32 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import useSWR from 'swr'
 import MyTask from '../../components/MyTask/MyTask';
 import Spinner from '../../components/Spinner/Spinner';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { updateComplete } from '../../taskApi/taskApi';
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 const MyTasks = () => {
   const { user } = useContext(AuthContext);
   const router = useRouter();
   const { data: tasks, isLoading, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/user/tasks/${user?.email}?status=incomplete`, fetcher);
+
+  const handleComplete = (id) => {
+    updateComplete(id)
+      .then((data) => {
+        if (data.modifiedCount) {
+          toast.success("Task Completed");
+          mutate();
+        }
+      }).catch((err) => {
+        console.error(err);
+        toast.error(err.message);
+      })
+  };
 
   if (error) {
     return (
@@ -50,6 +65,7 @@ const MyTasks = () => {
                   tasks?.map(task => <MyTask
                     key={task._id}
                     task={task}
+                    handleComplete={handleComplete}
                   ></MyTask>)
                 }
               </>

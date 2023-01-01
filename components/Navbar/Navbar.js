@@ -48,7 +48,7 @@ const Navbar = () => {
           </span>
         </div>
         <div>
-          <ul className={`md:flex gap-10 md:items-center z-[-1] md:z-auto md:static absolute bg-white/50 md:bg-white w-full left-0 md:w-auto md:py-0 py-2 md:pl-0 pl-2 transition-all ease-in duration-500 ${open ? 'top-20 opacity-100 -mt-8 md:mt-0 z-10 h-80 md:h-auto' : 'top-[-490px] md:opacity-100 opacity-0'}`}>
+          <ul className={`md:flex gap-10 md:items-center z-[-1] md:z-auto md:static absolute bg-white/90 md:bg-white w-full left-0 md:w-auto md:py-0 py-2 md:pl-0 pl-2 transition-all ease-in duration-500 ${open ? 'top-20 opacity-100 -mt-8 md:mt-0 z-10 h-80 md:h-auto' : 'top-[-490px] md:opacity-100 opacity-0'}`}>
             {
               user?.uid &&
               <>
