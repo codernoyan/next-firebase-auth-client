@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import CompletedTask from '../../components/CompletedTask/CompletedTask';
 import Spinner from '../../components/Spinner/Spinner';
 import { AuthContext } from '../../contexts/AuthProvider';
-import { updateIncomplete } from '../../taskApi/taskApi';
+import { deleteTask, updateIncomplete } from '../../taskApi/taskApi';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
@@ -20,6 +20,20 @@ const Completed = () => {
       .then((data) => {
         if (data.modifiedCount) {
           toast.success("Task back to My Task");
+          mutate();
+        }
+      }).catch((err) => {
+        console.error(err);
+        toast.error(err.message);
+      })
+  };
+
+  // delete a task
+  const handleDelete = (id) => {
+    deleteTask(id)
+      .then((data) => {
+        if (data.deletedCount) {
+          toast.success("Task Deleted");
           mutate();
         }
       }).catch((err) => {
@@ -66,6 +80,7 @@ const Completed = () => {
                     key={task._id}
                     task={task}
                     handleIncomplete={handleIncomplete}
+                    handleDelete={handleDelete}
                   ></CompletedTask>)
                 }
               </>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CompletedTask = ({ task, handleIncomplete }) => {
+const CompletedTask = ({ task, handleIncomplete, handleDelete }) => {
   const { _id, title, status } = task;
 
   return (
@@ -10,8 +10,8 @@ const CompletedTask = ({ task, handleIncomplete }) => {
         <p>Status: <span className="capitalize text-sky-600">{status}</span></p>
       </div>
       <div className="flex gap-2">
-        <button className="bg-sky-500 px-4 py-1 rounded-md text-white font-semibold text-sm">
-          Details
+        <button onClick={()=> handleDelete(_id)} className="bg-sky-500 px-4 py-1 rounded-md text-white font-semibold text-sm">
+          Delete
         </button>
         <button onClick={() => handleIncomplete(_id)} className="bg-sky-500 px-4 py-1 rounded-md text-white font-semibold text-sm">
           Incomplete

@@ -69,11 +69,11 @@ const Navbar = () => {
             {
               user?.uid ?
                 <li>
-                  <button onClick={handleLogOutExistingUser} className="bg-sky-500 text-white font-bold px-6 py-2 rounded-sm">Logout</button>
+                  <button onClick={handleLogOutExistingUser} className="bg-sky-500 text-white font-bold px-6 py-2 rounded-md duration-500 hover:bg-sky-700">Logout</button>
                 </li>
                 :
                 <li>
-                  <button onClick={() => router.push('/login')} className="bg-sky-500 text-white font-bold px-6 py-2 rounded-sm duration-500 hover:bg-sky-700">Login</button>
+                  <button onClick={() => router.push('/login')} className="bg-sky-500 text-white font-bold px-6 py-2 rounded-md duration-500 hover:bg-sky-700">Login</button>
                 </li>
             }
           </ul>

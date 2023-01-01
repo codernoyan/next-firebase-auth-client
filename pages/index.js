@@ -1,6 +1,10 @@
 import Head from 'next/head'
+import Image from 'next/image';
+import { useRouter } from 'next/router'
+import taskImage from '../public/task.gif';
 
 export default function Home() {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -10,8 +14,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="h-screen flex justify-center items-center">
-          <h2 className="text-2xl font-semibold">Hello Next.js Firebase Project</h2>
+        <div className="flex justify-center items-center">
+          <div className="text-center space-y-2">
+            <Image src={taskImage} width={400} height={400} alt="task image"></Image>
+            <h2 className="text-xl font-semibold">Next Firebase <span className="font-bold text-sky-600">Task App</span></h2>
+            <div>
+              <button onClick={() => router.push('/addTask')} className="px-8 py-2 text-white font-bold bg-sky-500 rounded-md duration-500 hover:bg-sky-700">
+                Add Task
+              </button>
+            </div>
+          </div>
         </div>
       </main>
     </>

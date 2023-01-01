@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const MyTask = ({ task, handleComplete }) => {
+const MyTask = ({ task, handleComplete, handleDelete }) => {
   // console.log(task);
   const {_id, title, status } = task;
   const router = useRouter();
@@ -14,6 +14,9 @@ const MyTask = ({ task, handleComplete }) => {
       <div className="flex gap-2">
         <button onClick={()=> router.push(`/myTask/${_id}`)} className="bg-sky-500 px-4 py-1 rounded-md text-white font-semibold text-sm">
           Details
+        </button>
+        <button onClick={()=> handleDelete(_id)} className="bg-sky-500 px-4 py-1 rounded-md text-white font-semibold text-sm">
+          Delete
         </button>
         <button onClick={()=> handleComplete(_id)} className="bg-sky-500 px-4 py-1 rounded-md text-white font-semibold text-sm">
           Complete
