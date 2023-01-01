@@ -17,10 +17,10 @@ const TaskDetails = ({ task }) => {
           <h2 className="text-2xl font-semibold">My Task</h2>
         </div>
         <div className="mt-2 space-y-1">
-          <h2 className="font-semibold">Task Title: <span className="capitalize">{title}</span></h2>
-          <p>Description: <span className="capitalize">{task.description}</span></p>
-          <p className="text-sm font-medium">Added On: {task.addedTime}</p>
-          <p className="text-sky-600 font-semibold">Added By: {task.userEmail}</p>
+          <h2 className="font-semibold">Task Title: <span className="capitalize">{task?.title}</span></h2>
+          <p>Description: <span className="capitalize">{task?.description}</span></p>
+          <p className="text-sm font-medium">Added On: {task?.addedTime}</p>
+          <p className="text-sky-600 font-semibold">Added By: {task?.userEmail}</p>
         </div>
       </section>
     </>

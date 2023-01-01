@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const MyTask = ({ task }) => {
-  console.log(task);
+  // console.log(task);
   const {_id, title, status } = task;
   const router = useRouter();
   return (
