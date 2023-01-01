@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 
 const TaskDetails = ({ task }) => {
-  const { title, description, addedTime, status, userEmail } = task;
+  // const { title, description, addedTime, status, userEmail } = task;
   
   return (
     <>
@@ -18,9 +18,9 @@ const TaskDetails = ({ task }) => {
         </div>
         <div className="mt-2 space-y-1">
           <h2 className="font-semibold">Task Title: <span className="capitalize">{title}</span></h2>
-          <p>Description: <span className="capitalize">{description}</span></p>
-          <p className="text-sm font-medium">Added On: {addedTime}</p>
-          <p className="text-sky-600 font-semibold">Added By: {userEmail}</p>
+          <p>Description: <span className="capitalize">{task.description}</span></p>
+          <p className="text-sm font-medium">Added On: {task.addedTime}</p>
+          <p className="text-sky-600 font-semibold">Added By: {task.userEmail}</p>
         </div>
       </section>
     </>
@@ -32,7 +32,7 @@ export default TaskDetails;
 export const getServerSideProps = async (context) => {
   const { params } = context;
   // data fetch
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/task/details/${params.taskId}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/task/details/${params?.taskId}`);
   const data = await res.json();
 
   return {
@@ -49,7 +49,7 @@ export const getServerSidePaths = async () => {
   const paths = tasks.map(task => {
     return {
       params: {
-        taskId: `${task._id}`
+        taskId: `${task?._id}`
       }
     }
   })
